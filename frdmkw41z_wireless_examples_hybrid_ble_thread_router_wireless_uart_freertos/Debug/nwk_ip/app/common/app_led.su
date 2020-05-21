@@ -1,0 +1,5 @@
+app_led.c:264:6:Led_SetState	40	static
+app_led.c:281:6:Led_UpdateRgbState	8	static
+app_led.c:306:6:Led_MacTxOn	8	static
+app_led.c:331:6:Led_MacTxOff	8	static
+app_led.c:359:6:Led_Identify	8	static

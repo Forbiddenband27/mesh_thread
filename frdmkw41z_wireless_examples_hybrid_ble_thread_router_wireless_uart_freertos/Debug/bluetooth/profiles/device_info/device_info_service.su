@@ -1,0 +1,2 @@
+device_info_service.c:64:13:Dis_Start	56	static
+device_info_service.c:98:13:Dis_Stop	0	static

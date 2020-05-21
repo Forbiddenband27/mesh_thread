@@ -1,0 +1,4 @@
+wireless_uart_service.c:58:13:Wus_Start	0	static
+wireless_uart_service.c:65:13:Wus_Stop	0	static
+wireless_uart_service.c:70:13:Wus_Subscribe	0	static
+wireless_uart_service.c:78:13:Wus_Unsubscribe	0	static

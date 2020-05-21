@@ -1,0 +1,5 @@
+battery_service.c:69:13:Bas_Stop	0	static
+battery_service.c:75:13:Bas_Subscribe	0	static
+battery_service.c:81:13:Bas_Unsubscribe	0	static
+battery_service.c:87:13:Bas_RecordBatteryMeasurement	56	static
+battery_service.c:61:13:Bas_Start	8	static

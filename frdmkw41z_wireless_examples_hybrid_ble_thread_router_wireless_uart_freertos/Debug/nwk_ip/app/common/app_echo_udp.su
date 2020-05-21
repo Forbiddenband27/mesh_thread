@@ -1,0 +1,8 @@
+app_echo_udp.c:146:6:ECHO_UdpServerService	16	static
+app_echo_udp.c:172:6:ECHO_service	24	static
+app_echo_udp.c:506:13:ECHO_RetransmitCallback	8	static
+app_echo_udp.c:492:13:ECHO_TimerCallback	8	static
+app_echo_udp.c:424:15:ECHO_CreatePacket	72	static
+app_echo_udp.c:339:13:ECHO_HandleTimerCallback	16	static
+app_echo_udp.c:86:6:ECHO_ProtocolInit	56	static
+app_echo_udp.c:229:8:ECHO_ShellUdp	112	static

@@ -1,0 +1,16 @@
+app_thread_callbacks.c:413:15:APP_JoinerNwkListAdd.isra.1.constprop	24	static
+app_thread_callbacks.c:116:8:APP_DiscoveryReqCb	0	static
+app_thread_callbacks.c:140:6:APP_JoinerDiscoveryRespCb	64	static
+app_thread_callbacks.c:226:6:APP_JoinerSelectNwkWithAnnounceCb	40	static
+app_thread_callbacks.c:301:6:APP_JoinerSelectNwkWithBeaconCb	144	static
+app_thread_callbacks.c:678:6:APP_NwkCreateCb	112	static
+app_thread_callbacks.c:773:8:APP_OutOfBandSelectNwkWithBeaconCb	88	static
+app_thread_callbacks.c:830:8:APP_MeshcopValidateJoinerAddrCb	40	static
+app_thread_callbacks.c:876:8:APP_MeshCopValidateJoinFinCb	96	static
+app_thread_callbacks.c:920:8:APP_MeshCopValidateCommissionerCb	0	static
+app_thread_callbacks.c:945:9:APP_AddressAssignSlaacCb	24	static
+app_thread_callbacks.c:999:6:APP_NwkData_ServiceDataCb	24	static
+app_thread_callbacks.c:1059:6:APP_NwkData_ServiceServerDataCb	0	static
+app_thread_callbacks.c:1079:6:APP_GenerateMLPrefixCb	8	static
+app_thread_callbacks.c:1094:6:APP_EnableDHCP6Cb	40	static
+app_thread_callbacks.c:1129:6:APP_BeaconFillCb	8	static

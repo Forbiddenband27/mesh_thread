@@ -1,0 +1,2 @@
+ble_controller_task.c:104:13:ControllerTask	8	static
+ble_controller_task.c:139:13:Controller_TaskInit	152	static

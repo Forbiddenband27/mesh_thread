@@ -1,0 +1,6 @@
+ble_service_discovery.c:87:6:BleServDisc_RegisterCallback	0	static
+ble_service_discovery.c:92:13:BleServDisc_Start	32	static
+ble_service_discovery.c:128:13:BleServDisc_FindService	48	static
+ble_service_discovery.c:166:6:BleServDisc_Stop	24	static
+ble_service_discovery.c:335:13:BleServDisc_Finished	24	static
+ble_service_discovery.c:175:6:BleServDisc_SignalGattClientEvent	48	static

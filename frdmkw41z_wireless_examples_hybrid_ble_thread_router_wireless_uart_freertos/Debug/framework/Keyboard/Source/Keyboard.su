@@ -1,0 +1,10 @@
+Keyboard.c:1111:6:KBD_TSI_IrqHandler	24	static
+Keyboard.c:603:13:KeyScan	32	static
+Keyboard.c:1064:6:Switch_Press_ISR	16	static
+Keyboard.c:1095:13:TsiSwTriggerCallback	16	static
+Keyboard.c:433:6:KBD_Deinit	16	static
+Keyboard.c:885:6:KBD_Init	56	static
+Keyboard.c:969:8:KBD_IsWakeUpSource	8	static
+Keyboard.c:997:6:KBD_PrepareEnterLowPower	8	static
+Keyboard.c:1022:6:KBD_PrepareExitLowPower	16	static
+Keyboard.c:1043:6:KBD_SwitchPressedOnWakeUp	8	static

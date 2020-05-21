@@ -1,0 +1,197 @@
+{# source/serialcom/templates/serialcom/index.html #}
+<!DOCTYPE html>
+<html>
+<head>
+	<title>SerialCOM</title>
+
+<script type="text/javascript">
+/**
+ * utils function:
+ */
+function sleep(ms) {
+  return new Promise(resolve => setTimeout(resolve, ms));
+}
+
+	/**
+	 *  Connect function
+	 */
+	async function waitBack2ConnectText() {
+	  await sleep(3000);
+	  document.getElementById("connect").value = "Connect";
+	}
+	async function waitBack2DisconnectText() {
+	  await sleep(3000);
+	  document.getElementById("connect").value = "Disconnect";
+	}
+
+	function connect_serial(){
+		var xmlhttp;
+		if (window.XMLHttpRequest){  //  IE7+, Firefox, Chrome, Opera, Safari
+		    xmlhttp=new XMLHttpRequest();
+		}else{  // IE6, IE5 
+		    xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+		}
+		
+		xmlhttp.open("POST", "/serialcom/connect/", true);
+		xmlhttp.setRequestHeader("Content-type","application/x-www-form-urlencoded");
+
+		var conn_status = document.getElementById("connect").value;
+		if (conn_status == "Connect"){
+			xmlhttp.send("connect=" + conn_status +
+						 "&device_select=" + document.getElementById("device_select").value +
+				         "&baud=" + document.getElementById("baud").value +
+				         "&csrfmiddlewaretoken=" + document.getElementsByName("csrfmiddlewaretoken")[0].value);
+		}else if(conn_status == "Disconnect"){
+			xmlhttp.send("connect=" + conn_status +
+						 "&device_select=" + document.getElementById("device_select").value +
+				         "&csrfmiddlewaretoken=" + document.getElementsByName("csrfmiddlewaretoken")[0].value);
+		}
+		var IsConnected = ""
+		xmlhttp.onreadystatechange=function()
+		{
+			if (xmlhttp.readyState==4 && xmlhttp.status==200){
+				IsConnected = xmlhttp.responseText;
+				if (conn_status == "Connect"){
+					if (IsConnected == "True"){
+						document.getElementById("connect").value = "Disconnect";
+						/**
+						 * start recv thread
+						 */
+						update_recv(500);
+					}else if(IsConnected == "False"){
+						document.getElementById("connect").value = "FAIL connect!";
+						waitBack2ConnectText();
+					}
+				}else if(conn_status == "Disconnect"){
+					if (IsConnected == "False"){
+						document.getElementById("connect").value = "Connect";
+					}else if(IsConnected == "True"){
+						document.getElementById("connect").value = "FAIL disconnect!";
+						waitBack2DisconnectText();
+					}
+				}
+			}
+		}
+	}
+</script>
+</head>
+<body>
+	<h1>Serial/COM</h1>
+
+	<form action="" method="POST">
+		<div>
+			<label>Serial/COM:</label>
+			<select name="device_select" id="device_select">
+				<option>Select one Device</option>
+			{% for device in serial.devices	%}
+				<option>{{ device }}</option>
+			{% endfor	%}
+			</select>
+
+			<label>Baud:</label>
+			<input type="text" name="baud" id="baud"
+			       value="115200"/>
+			<br/>
+
+			<input type="checkbox" name="advance"
+			       value="advance">Advance
+			<input type="button" name="connect" id="connect"
+			       value="Connect" onclick="connect_serial()" />
+			<!--<INPUT type="hidden" name="conn_status" id="conn_status" value="Disconnect"/>-->
+		</div>
+		{% csrf_token %}
+	</form>
+	<br/>
+	<form action="" method="POST" onkeydown="if(event.keyCode==13){return false;}">
+		{% csrf_token %}
+		<div>
+			<select>
+				<option>Serial Mode</option>
+				<option>Console Mode</option>
+			</select>
+		</div>
+		<div>
+			<textarea name="serial_recv" id="serial_recv"
+			       rows="10" cols="30">
+			</textarea>
+			<br/>
+			<input type="hidden" name="click_to_recv" id="click_to_recv"
+			       value="Click to Receive" onclick="click2recv()" />
+			<script>
+				/**
+				 * just clean the textarea at first load this page.
+				 */
+				document.getElementById("serial_recv").value = "";
+
+				function IsConnected(){
+					if (document.getElementById("connect").value == "Disconnect" ||
+						document.getElementById("connect").value == "FAIL disconnect!"){
+						return true;
+					}
+				}
+				async function update_recv(_time){
+					await sleep(_time);
+					if ( IsConnected()/* stop? */ ){
+						recv_and_callback(update_recv, _time)
+					}
+				}
+
+				function recv_and_callback(_callbackfunc, _time){
+					var xmlhttp_recv;
+					if (window.XMLHttpRequest){ //  IE7+, Firefox, Chrome, Opera, Safari
+					    xmlhttp_recv=new XMLHttpRequest();
+					}else{ // IE6, IE5 
+					    xmlhttp_recv=new ActiveXObject("Microsoft.XMLHTTP");
+					}
+					
+					xmlhttp_recv.open("GET",
+						              "/serialcom/receive/?device=" +
+						              document.getElementById("device_select").value,
+						              true);
+					xmlhttp_recv.send();
+
+					var str_recv = ""
+					xmlhttp_recv.onreadystatechange=function()
+					{
+						if (xmlhttp_recv.readyState==4 && xmlhttp_recv.status==200){
+							str_recv = xmlhttp_recv.responseText;
+							document.getElementById("serial_recv").value += str_recv;
+							_callbackfunc(_time);
+						}
+					}
+				}
+
+			</script>
+			<br/>
+			<input type="text" name="ser_tx" id="ser_tx">
+			<input type="button" name="tx_send" value="SEND" onclick="click2send()"/>
+			<script>
+				function click2send(){
+					var xmlhttp_send;
+					if (window.XMLHttpRequest){ //  IE7+, Firefox, Chrome, Opera, Safari
+					    xmlhttp_send=new XMLHttpRequest();
+					}else{ // IE6, IE5 
+					    xmlhttp_send=new ActiveXObject("Microsoft.XMLHTTP");
+					}
+					
+					xmlhttp_send.open("POST", "/serialcom/send/", true);
+					xmlhttp_send.setRequestHeader("Content-type","application/x-www-form-urlencoded");
+					xmlhttp_send.send(
+						"send=" + "send" + "&device=" + document.getElementById("device_select").value +
+						"&data=" + document.getElementById("ser_tx").value +
+						"&csrfmiddlewaretoken=" + document.getElementsByName("csrfmiddlewaretoken")[1].value);
+
+					var succ_send = 0
+					xmlhttp_send.onreadystatechange=function()
+					{
+						if (xmlhttp_send.readyState==4 && xmlhttp_send.status==200){
+							succ_send = parseInt(xmlhttp_send.responseText);
+							alert("send " + succ_send + "byte(s) success");
+						}
+					}
+				}
+			</script>
+		</div>
+	</form>
+</body>
+</html>

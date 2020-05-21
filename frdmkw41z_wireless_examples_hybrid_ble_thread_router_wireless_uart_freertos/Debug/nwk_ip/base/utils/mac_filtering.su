@@ -1,0 +1,8 @@
+mac_filtering.c:375:37:MacFiltering_GetEntry.part.0	32	static
+mac_filtering.c:69:13:MacFiltering_UpdateNeighbor	24	static
+mac_filtering.c:111:13:MacFiltering_AddNeighbor	56	static
+mac_filtering.c:195:13:MacFiltering_RemoveNeighbor	16	static
+mac_filtering.c:228:8:MacFiltering_KeepPacket	32	static
+mac_filtering.c:305:13:MacFiltering_Active	8	static
+mac_filtering.c:328:23:MacFiltering_IsActive	0	static
+mac_filtering.c:344:8:MacFiltering_Reset	8	static
