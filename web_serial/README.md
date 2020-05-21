@@ -1,19 +1,5 @@
-## Adafruit_Python_DHT
-
-Adafruit Python DHT Sensor Library
-
-
-## Adafruit_Python_SSD1306
-
-Python library from Adafruit for OLED
-
-
-
-## piclone
-
-CLONE Current system image, available for recovery.
-
-
+Based on https://github.com/RDpWTeHM/RaspberryPi by RDpWTeHM,  licensed under the Apache License 2.0 
+ 
 ## web-serial
 
 Web Serial Assistant implemented via Python + Django + pyserial.
