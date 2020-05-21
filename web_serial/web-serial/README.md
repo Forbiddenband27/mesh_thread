@@ -1,7 +1,5 @@
 # Web Serial
 
-**网页版串口（调试）助手**
-
 <p align="right">powered by django</p>
 
 ## *Overview*
@@ -45,14 +43,6 @@ Directory of <path>\<to>\web-serial\source
 source\ > python manage.py runserver
 
 ```
-
-会自动弹出浏览器打开 SerialCOM 这个 web-serial 应用。
-
-然后就可以使用了 :point_down:
-
-![n/a](Doc/res/web-serial_演示.gif)
-
-<p align="middle">左侧使用桌面版串口助手测试；右侧为本 Web 版串口助手</p>
 
 
 
