@@ -14,13 +14,6 @@ Python library from Adafruit for OLED
 CLONE Current system image, available for recovery.
 
 
-
-## script
-
-Several scripts
-
-
-
 ## web-serial
 
 Web Serial Assistant implemented via Python + Django + pyserial.
